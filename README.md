@@ -1,12 +1,12 @@
 # AI Code Reviewer
 
-AI Code Reviewer is a GitHub Action that leverages OpenAI's GPT-4 API to provide intelligent feedback and suggestions on
+AI Code Reviewer is a GitHub Action that leverages Azure OpenAI API to provide intelligent feedback and suggestions on
 your pull requests. This powerful tool helps improve code quality and saves developers time by automating the code
 review process.
 
 ## Features
 
-- Reviews pull requests using OpenAI's GPT-4 API.
+- Reviews pull requests using Azure OpenAI API.
 - Provides intelligent comments and suggestions for improving your code.
 - Filters out files that match specified exclude patterns.
 - Easy to set up and integrate into your GitHub workflow.
@@ -16,7 +16,7 @@ review process.
 1. To use this GitHub Action, you need an OpenAI API key. If you don't have one, sign up for an API key
    at [OpenAI](https://beta.openai.com/signup).
 
-2. Add the OpenAI API key as a GitHub Secret in your repository with the name `OPENAI_API_KEY`. You can find more
+2. Add the Azure OpenAI API key as a GitHub Secret in your repository with the name `AZURE_OPENAI_API_KEY`. You can find more
    information about GitHub Secrets [here](https://docs.github.com/en/actions/reference/encrypted-secrets).
 
 3. Create a `.github/workflows/main.yml` file in your repository and add the following content:
@@ -41,8 +41,10 @@ jobs:
         uses: your-username/ai-code-reviewer@main
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # The GITHUB_TOKEN is there by default so you just need to keep it like it is and not necessarily need to add it as secret as it will throw an error. [More Details](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret)
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_API_MODEL: "gpt-4" # Optional: defaults to "gpt-4"
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_API_VERSION: "2024-05-01-preview"
+          AZURE_OPENAI_DEPLOYMENT: "gpt-4o"
+          AZURE_OPENAI_ENDPOINT: "https://your-openai-endpoint.openai.azure.com/"
           exclude: "**/*.json, **/*.md" # Optional: exclude patterns separated by commas
 ```
 

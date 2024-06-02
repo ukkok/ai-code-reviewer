@@ -1,16 +1,21 @@
-name: "AI Code Review Action"
-description: "Perform code reviews and comment on diffs using OpenAI API."
+name: "AI PR Review Action"
+description: "Perform code reviews and comment on diffs using Azure OpenAI API."
 inputs:
   GITHUB_TOKEN:
     description: "GitHub token to interact with the repository."
     required: true
-  OPENAI_API_KEY:
-    description: "OpenAI API key for GPT."
+  AZURE_OPENAI_ENDPOINT:
+    description: "Azure OpenAI endpoint"
     required: true
-  OPENAI_API_MODEL:
-    description: "OpenAI API model."
-    required: false
-    default: "gpt-4"
+  AZURE_OPENAI_API_KEY:
+    description: "Azure OpenAI API key"
+    required: true
+  AZURE_OPENAI_API_VERSION:
+    description: "Azure OpenAI API version"
+    required: true
+  AZURE_OPENAI_DEPLOYMENT:
+    description: "Azure OpenAI deployment"
+    required: true
   exclude:
     description: "Glob patterns to exclude files from the diff analysis"
     required: false

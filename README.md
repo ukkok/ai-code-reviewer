@@ -45,6 +45,7 @@ jobs:
           AZURE_OPENAI_API_VERSION: "2024-05-01-preview"
           AZURE_OPENAI_DEPLOYMENT: "gpt-4o"
           AZURE_OPENAI_ENDPOINT: "https://your-openai-endpoint.openai.azure.com/"
+          CUSTOM_PROMPT: "Review the code and provide feedback on how to improve it."
           exclude: "**/*.json, **/*.md" # Optional: exclude patterns separated by commas
 ```
 

@@ -10,6 +10,7 @@ const AZURE_OPENAI_ENDPOINT: string = core.getInput('AZURE_OPENAI_ENDPOINT');
 const AZURE_OPENAI_API_KEY: string = core.getInput('AZURE_OPENAI_API_KEY');
 const AZURE_OPENAI_API_VERSION: string = core.getInput('AZURE_OPENAI_API_VERSION');
 const AZURE_OPENAI_DEPLOYMENT: string = core.getInput('AZURE_OPENAI_DEPLOYMENT');
+const CUSTOM_PROMPT: string = core.getInput('CUSTOM_PROMPT');
 
 const octokit = new Octokit({ auth: GITHUB_TOKEN });
 
@@ -84,6 +85,11 @@ async function analyzeCode(
 }
 
 function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
+
+  let custom_prompt = CUSTOM_PROMPT !== ''
+      ? "**Custom instructions:**\n" + CUSTOM_PROMPT + "\n\n"
+      : '';
+
   return `Your task is to review pull requests. Instructions:
 - Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
 - Do not give positive comments or compliments.
@@ -91,6 +97,8 @@ function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
 - Write the comment in GitHub Markdown format.
 - Use the given description only for the overall context and only comment the code.
 - IMPORTANT: NEVER suggest adding comments to the code.
+
+${custom_prompt}
 
 Review the following code diff in the file "${
     file.to
